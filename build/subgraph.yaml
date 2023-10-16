@@ -1,0 +1,61 @@
+specVersion: 0.0.5
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Factory
+    network: mumbai
+    source:
+      address: "0x326abC5AC2d262965a244CF3C36c76bad76cbd49"
+      abi: Factory
+      startBlock: 41233495
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Collection
+        - NewCollectionDeployed
+      abis:
+        - name: Factory
+          file: Factory/abis/Factory.json
+        - name: Collection
+          file: Factory/abis/SecretNFT.json
+      eventHandlers:
+        - event: NewCollectionDeployed(indexed address,string,string)
+          handler: handleCreateCollection
+      blockHandlers:
+        - handler: handleNewBlock
+      file: Factory/Factory.wasm
+templates:
+  - kind: ethereum
+    name: Collection
+    network: mumbai
+    source:
+      abi: Collection
+    mapping:
+      kind: ethereum
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: templates/Collection/Collection.wasm
+      entities:
+        - Approval
+        - ApprovalForAll
+        - Initialized
+        - TokenMinted
+        - Transfer
+        - TokenMetadataSet
+      abis:
+        - name: Collection
+          file: Collection/abis/SecretNFT.json
+        - name: Factory
+          file: Collection/abis/Factory.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: TokenMinted(indexed uint256,indexed address,(bytes32,bytes32,bytes,bytes))
+          handler: handleTokenMinted
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+        - event: TokenMetadataUpdated(indexed uint256,(bytes32,bytes32,bytes,bytes))
+          handler: handleMetadataUpdated

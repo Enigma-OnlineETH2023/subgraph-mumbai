@@ -1,0 +1,78 @@
+type Factory @entity {
+  id: ID!
+  collectionsCount: Int!
+  collections: [Collection!]! @derivedFrom(field: "factory")
+  collectionImplementation: Bytes! # address
+  lastSnapshotBlockTimestamp: BigInt!
+  lastSnapshotBlockNumber: BigInt!
+}
+
+type Collection @entity {
+  id: ID!
+  factory: Factory!
+  collection: Bytes! # address
+  name: String! # string
+  symbol: String! # string
+  tokensCount: Int!
+  tokens: [Token!]! @derivedFrom(field: "collection")
+}
+
+type Token @entity {
+  id: ID!
+  collection: Collection!
+  tokenId: BigInt! # uint256
+  publicURI: String! # string
+  hashPrivateURI: Bytes! # bytes32
+  originalHashPrivateURI: Bytes! # bytes32
+  encryptedPrivateURI: Bytes! # bytes
+  owner: Bytes! # address
+}
+
+type CollectionDeployed @entity(immutable: true) {
+  id: ID!
+  collection: Collection!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Approval @entity(immutable: true) {
+  id: ID!
+  owner: Bytes! # address
+  approved: Bytes! # address
+  token: Token!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TokenMinted @entity(immutable: true) {
+  id: ID!
+  token: Token!
+  owner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+
+type TokenMetadataSet @entity(immutable: true) {
+  id: ID!
+  token: Token!
+  publicURI: Bytes! # bytes
+  hashPrivateURI: Bytes! # bytes32
+  encryptedPrivateURI: Bytes! # bytes
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Transfer @entity(immutable: true) {
+  id: ID!
+  from: Bytes! # address
+  to: Bytes! # address
+  token: Token!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

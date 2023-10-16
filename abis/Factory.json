@@ -1,0 +1,149 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_secretNFTContractImplementation",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IAccessManager",
+        "name": "_accessManager",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  { "inputs": [], "name": "ERC1167FailedCreateClone", "type": "error" },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "caller", "type": "address" }
+    ],
+    "name": "OnlyAdminCanCall",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "collectionAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "symbol",
+        "type": "string"
+      }
+    ],
+    "name": "NewCollectionDeployed",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "accessManager",
+    "outputs": [
+      {
+        "internalType": "contract IAccessManager",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract IAccessManager",
+        "name": "_accessManager",
+        "type": "address"
+      },
+      { "internalType": "string", "name": "_name", "type": "string" },
+      { "internalType": "string", "name": "_symbol", "type": "string" }
+    ],
+    "name": "deployCollection",
+    "outputs": [
+      { "internalType": "address", "name": "collection", "type": "address" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_index", "type": "uint256" }
+    ],
+    "name": "getCollectionAddress",
+    "outputs": [
+      { "internalType": "address", "name": "_collection", "type": "address" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getCollectionsAddresses",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "_collections",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getCollectionsNumber",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "_collectionNumber",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_collection", "type": "address" }
+    ],
+    "name": "isCollectionAddress",
+    "outputs": [
+      { "internalType": "bool", "name": "_isCollectionAddress", "type": "bool" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "secretNFTContractImplementation",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_secretNFTContractImplementation",
+        "type": "address"
+      }
+    ],
+    "name": "setSecretNFTContractImplementation",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
